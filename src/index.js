@@ -6,6 +6,10 @@ var RGX = /^(-?(?:\d+)?\.?\d+) *(m(?:illiseconds?|s(?:ecs?)?))?(s(?:ec(?:onds?|s
 	YEAR = DAY * 365.25;
 
 export function parse(val) {
+	val = String(val);
+  if (val.length > 100) {
+    throw new Error('Value exceeds the maximum length of 100 characters.');
+  }
 	var num, arr = val.toLowerCase().match(RGX);
 	if (arr != null && (num = parseFloat(arr[1]))) {
 		if (arr[3] != null) return num * SEC;
